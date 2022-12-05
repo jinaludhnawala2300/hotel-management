@@ -1,0 +1,102 @@
+﻿  <!--================Breadcrumb Area =================-->
+    <section class="breadcrumb_area">
+      <div
+        class="overlay bg-parallax"
+        data-stellar-ratio="0.8"
+        data-stellar-vertical-offset="0"
+        data-background=""
+      ></div>
+      <div class="container">
+        <div class="page-cover text-center">
+          <h2 class="page-cover-tittle">Contact Us</h2>
+          <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Contact Us</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    <!--================Breadcrumb Area =================-->
+
+    <!--================Contact Area =================-->
+    <section class="contact_area section_gap">
+      <div class="container">
+        <form id="contact-frm">
+          <h1>Contact Us</h1>
+          <div class="form-wrapper">
+            <div class="input-wrap">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="firstname"
+                  id="firstname"
+                  class="form-control"
+                  placeholder="First Name"
+                />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  class="form-control"
+                  placeholder="Last Name"
+                />
+              </div>
+            </div>
+            <div class="input-wrap">
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Email Address"
+                />
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="contactno" id="contactno" placeholder="conatct" />
+              </div>
+            </div>
+            <div class="form-group input-message">
+              <textarea
+                class="form-control"
+                name="description"
+                id="description"
+                rows="3"
+                placeholder="Enter Message"
+              ></textarea>
+            </div>
+            <div class="btn-wrapper">
+              <button onclick="CreateContact(event)">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!--================Contact Area =================-->
+
+<script>
+function CreateContact(e) {
+    e.preventDefault();
+    if ($("#contact-frm").valid()) {
+        var obj = new Object();
+        obj.customerName = $('#firstname').val() + $('#lastname').val();
+        obj.customerEmailId = $('#email').val();
+        obj.customerContactNo = $('#contactno').val();
+        obj.description = $('#description').val();
+        $.ajax({
+            url: '/api/contactUs',
+            type: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(obj),
+            success: function (res) {
+                swal("Thank You!", "Our executive will contact you shortly!", "success");
+            },
+            error: function (xhr) {
+                swal("OOPS!", xhr.responseText, "error");
+            }
+          });
+    };
+}
+</script>

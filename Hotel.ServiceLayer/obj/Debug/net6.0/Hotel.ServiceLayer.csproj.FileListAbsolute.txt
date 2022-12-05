@@ -1,0 +1,15 @@
+D:\Ravi\Hotel\Hotel.ServiceLayer\bin\Debug\net6.0\Hotel.ServiceLayer.deps.json
+D:\Ravi\Hotel\Hotel.ServiceLayer\bin\Debug\net6.0\Hotel.ServiceLayer.dll
+D:\Ravi\Hotel\Hotel.ServiceLayer\bin\Debug\net6.0\Hotel.ServiceLayer.pdb
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.csproj.AssemblyReference.cache
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.AssemblyInfoInputs.cache
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.AssemblyInfo.cs
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.csproj.CoreCompileInputs.cache
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.dll
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\refint\Hotel.ServiceLayer.dll
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.pdb
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\ref\Hotel.ServiceLayer.dll
+D:\Ravi\Hotel\Hotel.ServiceLayer\bin\Debug\net6.0\Hotel.DataLayer.dll
+D:\Ravi\Hotel\Hotel.ServiceLayer\bin\Debug\net6.0\Hotel.DataLayer.pdb
+D:\Ravi\Hotel\Hotel.ServiceLayer\obj\Debug\net6.0\Hotel.ServiceLayer.csproj.CopyComplete

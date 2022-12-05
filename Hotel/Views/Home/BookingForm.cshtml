@@ -1,0 +1,194 @@
+﻿<!-- ========================Booking form====================== -->
+<section class="booking-frm-section">
+    <div class="container">
+        <form id="booking-frm">
+            <h1>Booking Now</h1>
+            <div class="form-wrapper">
+                <div class="input-wrap">
+                    <div class="form-group">
+                        <input type="text"
+                               id="name"
+                               class="form-control"
+                               name="name"
+                               placeholder="Enter Name" />
+                    </div>
+                    <div class="form-group">
+                        <input id="email"
+                               type="email"
+                               name="email"
+                               class="form-control"
+                               placeholder="Enter Email" />
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="form-group">
+                        <input type="text" id="arrivaldate" name="arrivaldate" class="form-control" placeholder="Arrival Date" onfocus="(this.type = 'date')" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text"
+                               id="departuredate"
+                               name="departuredate"
+                               class="form-control"
+                               placeholder="Departure Date" ,
+                               onfocus="(this.type = 'date')" />
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="form-group">
+                        <select id="roomtype">
+                            <option value="0">select Room Type</option>
+                            @foreach (var roomType in ViewBag.RoomTypes)
+                            {
+                                <option value="@roomType.Id">@roomType.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="contactno" class="form-control" name="contactno" placeholder="Phone No" />
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="form-group  rooms">
+                        <label>No of Adults:</label>
+                        <div class="incdecnumber-btnwrap">
+                            <input type="button" value="-" id="subsadults" class="incdec-btn" />
+                            <input type="text" id="noofadults" name="rooms" value="1" class="form-control adults-incdec " />
+                            <input type="button" value="+" id="addsadults" class="incdec-btn" />
+                        </div>
+                    </div>
+                    <div class="form-group  rooms">
+                        <label>No of Children:</label>
+                        <div class="incdecnumber-btnwrap">
+                            <input type="button" value="-" id="subschild" class="incdec-btn" />
+                            <input type="text" id="noofchilldren" name="rooms" value="1" class="form-control child-incdec" />
+                            <input type="button" value="+" id="addschild" class="incdec-btn" />
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <div class="form-group  rooms">
+                        <label>No of Rooms:</label>
+                        <div class="incdecnumber-btnwrap">
+                            <input type="button" value="-" id="roomssubs" class="incdec-btn" />
+                            <input type="text" id="noofrooms" name="rooms" value="1" class="form-control rooms-incdec" />
+                            <input type="button" value="+" id="roomsadds" class="incdec-btn" />
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                      <span class="rooms-price">500</span>
+                    </div> -->
+                </div>
+                <div class="btn-wrapper">
+                    <button class="roombook-btn" onclick="BookRoom(event)">Book</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ========================Booking form =====================-->
+
+<script>
+    $(document).ready(function() {
+        if (@ViewBag.Id > 0) {
+            //$("#RoomType option[value=@ViewBag.Id]").attr('selected', true);
+            $("#roomtype").val(@ViewBag.Id);
+            $('#roomtype').niceSelect('update');
+        }
+    });
+
+            function BookRoom(e) {
+                e.preventDefault();
+                if ($("#booking-frm").valid())
+                {
+                    var obj = new Object();
+                    obj.roomTypeId = $("#roomtype").val();
+                    obj.customerName = $("#name").val();
+                    obj.customerContactNo = $("#contactno").val();
+                    obj.customerEmailId = $("#email").val();
+                    obj.noOfRooms = $("#noofrooms").val();
+                    obj.noOfAdults = $("#noofadults").val();
+                    obj.noOfChildren = $("#noofchildren").val();
+                    obj.checkInDate = $("#arrivaldate").val();
+                    obj.checkOutDate = $("#departuredate").val();
+
+                    $.ajax({
+                        url: '/api/bookRoom',
+                        type: 'POST',
+                        contentType: "application/json",
+                        data: JSON.stringify(obj),
+                        success: function (res) {
+                            debugger;
+                            $("html").addClass("no-scroll");
+                            $("body").append(
+                              `<div class="lightbox-opened-mask invoice-box">\
+                                <div class="lightbox-opened invoice-box">\
+                                  <div class="lightbox-inner">\
+                                  <div class="lightbox-content">\
+                                  <a class="close" title="Close">x</a>\
+                                  <div class="popup-box-wrapper">\
+                                    <a class="pop-up-brand-logo" href="#"><img src="image/Logo.png" alt=""></a>\
+
+                                    <div class="text-block-wrapper">
+                                      <div class="text-wrapper">
+                                        <p>Date:</p><span>${new Date().toLocaleDateString()}</span>
+                                       </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-wrapper">
+                                      <p>Customer Name:</p><span>${res.customerName}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>Customer ConatctNo:</p><span>${res.customerContactNo}</span>
+                                    </div>
+
+                                    <div class="text-wrapper">
+                                      <p>Customer Email:</p><span>${res.customerEmailId}</span>
+                                    </div>
+                                    <hr>
+                                    <div class="text-wrapper">
+                                      <p>Room Type:</p> <span>${res.roomType}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>No of Rooms:</p><span>${res.noOfRooms}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>No of Adults:</p><span>${res.noOfAdults}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>No of Children:</p><span>${res.noOfChildren}</span>
+                                    </div>
+                                    <hr>
+                                    <div class="text-wrapper">
+                                      <p>Check-in Date:</p><span>${new Date(res.checkInDate).toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>Check-out Date:</p><span>${new Date(res.checkOutDate).toLocaleDateString()}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>Price:</p><span>${res.price}</span>
+                                    </div>
+                                    <div class="text-wrapper">
+                                      <p>Service Charge:</p><span>${res.totalAmount * res.serviceCharge / 100}</span>
+                                    </div>
+                                    <hr>
+                                    <div class="text-wrapper">
+                                      <p>Total Amount:</p><span>${res.totalAmount}</span>
+                                    </div>
+                                    <h3 class="thankyou">Thank You</h3>
+                                  </div>\
+                                </div>\
+                               </div>\
+                              </div></div>`
+                            );
+                        },
+                        error: function (xhr) {
+                            swal("OOPS!", xhr.responseText, "error");
+                        }
+                      });
+                };
+            }
+</script>
+
+
+
